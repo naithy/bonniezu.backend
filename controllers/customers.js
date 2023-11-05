@@ -18,7 +18,9 @@ const deleteCustomer = async (req, res) => {
     try {
         const { id } = req.body
 
-        await Customer.findByIdAndDelete({id})
+        console.log(id)
+
+        await Customer.findByIdAndDelete(id)
 
     } catch (error) {
         res.status(404).json({

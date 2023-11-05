@@ -58,28 +58,3 @@ io.on('connection', (socket) => {
       }
     });
 })
-
-// server.on('connection', async (socket) => {
-//     try {
-//         const customers = await Customer.find()
-//         socket.send(JSON.stringify({type: 'items', payload: customers}))
-//     } catch (error) {
-//         console.error('Error retrieving items:', error)
-//     }
-
-//     const changeStream = Customer.watch();
-//     changeStream.on('change', (change) => {
-//         if (change.operationType === 'insert') {
-//             const customer = {
-//                 _id: change.fullDocument._id,
-//                 first_name: change.fullDocument.first_name,
-//                 last_name: change.fullDocument.first_name,
-//                 username: change.fullDocument.username,
-//                 user_id: change.fullDocument.user_id,
-//                 total_amount: change.fullDocument.total_amount,
-//                 payload: change.fullDocument.payload
-//             }
-//             socket.send(JSON.stringify({type: 'changeData', payload: customer}));
-//         }
-//     })
-// })
