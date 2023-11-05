@@ -45,7 +45,9 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));
 
 
-db.once('open', () => {
+io.on('connection', (socket) => {
+    console.log(`User connected ${socket.id}`)
+
     const changeStream = Customer.watch();
   
     changeStream.on('change', (change) => {
@@ -54,10 +56,6 @@ db.once('open', () => {
         socket.emit('receive_customer', newCustomer)
       }
     });
-  });
-
-io.on('connection', (socket) => {
-    console.log(`User connected ${socket.id}`)
 })
 
 // server.on('connection', async (socket) => {
