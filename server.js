@@ -44,7 +44,17 @@ mongoose.connect("mongodb://localhost:27001")
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));
 
-Customer.watch().on('change', data => console.log(data));
+
+db.once('open', () => {
+    const changeStream = Customer.watch();
+  
+    changeStream.on('change', (change) => {
+      if (change.operationType === 'insert') {
+        const newCustomer = change.fullDocument;
+        socket.emit('receive_customer', newCustomer)
+      }
+    });
+  });
 
 io.on('connection', (socket) => {
     console.log(`User connected ${socket.id}`)
