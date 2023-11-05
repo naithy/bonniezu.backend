@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/.well-known/acme-challenge/z5a-rSlBMvHwITCw2bhE85DJYegN2B1F4plnt5J5iAs', (req, res) => {
-    return res.status(200).send('z5a-rSlBMvHwITCw2bhE85DJYegN2B1F4plnt5J5iAs.6J7nS24mSfzCtz1vziOCgzLBL_ULeGXPYirt4tFOFAs')
+router.get('/.well-known/acme-challenge/_RqrYZiSW2cifTVcfn7DE5F167aQbhD8jviNt6858Is', (req, res) => {
+    return res.status(200).send('_RqrYZiSW2cifTVcfn7DE5F167aQbhD8jviNt6858Is.FRMPN6oI4B940dlzqnttr4ApGgG0Y1pHcxNJs3Pwwm4')
 })
 
 module.exports = router;
