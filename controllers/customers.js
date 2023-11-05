@@ -29,4 +29,5 @@ const deleteCustomer = async (req, res) => {
 
 module.exports = {
     getCustomers,
+    deleteCustomer
 }
