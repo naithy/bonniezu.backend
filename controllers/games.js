@@ -43,7 +43,7 @@ const createGame = async (req, res) => {
 
         const game = await Game.create({
             name, 
-            gameImage: `http://localhost:${process.env.PORT}/static/${req.file.filename}` 
+            gameImage: `https://bonniezu.ru/static/${req.file.filename}` 
         });
 
         res.status(201).json({game})
