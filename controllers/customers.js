@@ -16,12 +16,9 @@ const getCustomers = async (req, res) => {
 
 const deleteCustomer = async (req, res) => {
     try {
-        const { id } = req.body
 
-        console.log(id)
-
-        await Customer.findByIdAndDelete(id)
-
+        await Customer.findByIdAndDelete({_id: req.params.id})
+        res.status(200)
     } catch (error) {
         res.status(404).json({
             message: 'Не удалось найти удалить клиента с таким ID'
