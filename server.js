@@ -1,10 +1,13 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors')
-require('dotenv').config();
-
-
 const app = express();
+const http = require('http')
+const { Server } = require('socket.io')
+const mongoose = require('mongoose');
+const cors = require('cors');
+const Customer = require('./models/customer')
+
+
+require('dotenv').config();
 
 
 app.use(express.json());
@@ -18,13 +21,56 @@ app.use('/api/faceit', require('./routes/faceit'));
 app.use('/api/spotify', require('./routes/spotify'));
 app.use('/api/discord', require('./routes/discord'));
 
+const server = http.createServer(app);
+
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST"]
+    }
+});
+
 
 const port = process.env.PORT || 5000;
 
 
-mongoose.connect("mongodb://localhost:27017")
+mongoose.connect("mongodb://localhost:27001")
     .then(() => {
-        app.listen(port, () => {
+        server.listen(port, () => {
             console.log(`App listeing on port ${port}`);
         });
     });
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Connection error:'));
+
+Customer.watch().on('change', data => console.log(data));
+
+io.on('connection', (socket) => {
+    console.log(`User connected ${socket.id}`)
+})
+
+// server.on('connection', async (socket) => {
+//     try {
+//         const customers = await Customer.find()
+//         socket.send(JSON.stringify({type: 'items', payload: customers}))
+//     } catch (error) {
+//         console.error('Error retrieving items:', error)
+//     }
+
+//     const changeStream = Customer.watch();
+//     changeStream.on('change', (change) => {
+//         if (change.operationType === 'insert') {
+//             const customer = {
+//                 _id: change.fullDocument._id,
+//                 first_name: change.fullDocument.first_name,
+//                 last_name: change.fullDocument.first_name,
+//                 username: change.fullDocument.username,
+//                 user_id: change.fullDocument.user_id,
+//                 total_amount: change.fullDocument.total_amount,
+//                 payload: change.fullDocument.payload
+//             }
+//             socket.send(JSON.stringify({type: 'changeData', payload: customer}));
+//         }
+//     })
+// })
