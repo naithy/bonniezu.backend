@@ -54,7 +54,7 @@ io.on('connection', (socket) => {
     changeStream.on('change', (change) => {
       if (change.operationType === 'insert') {
         const newCustomer = change.fullDocument;
-        socket.emit('receive_customer', newCustomer)
+        socket.broadcast.emit('receive_customer', newCustomer)
       }
     });
 })
