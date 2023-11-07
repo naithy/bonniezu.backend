@@ -39,11 +39,12 @@ const createGame = async (req, res) => {
     }
 
     try {
-        const { name } = req.body;
+        const { name, types } = req.body;
 
         const game = await Game.create({
             name, 
-            gameImage: `https://bonniezu.ru/static/${req.file.filename}` 
+            gameImage: `https://bonniezu.ru/static/${req.file.filename}`,
+            types 
         });
 
         res.status(201).json({game})
