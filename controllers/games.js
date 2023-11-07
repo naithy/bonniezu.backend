@@ -34,6 +34,10 @@ const createGame = async (req, res) => {
         errors.gameImage = {message: "Пожалуйста, добавьте фото игры"}
     }
 
+    if(!req.body.types) {
+        errors.name = {message: 'Укажите опцию'}
+    }
+
     if (Object.keys(errors).length > 0) {
         return res.status(400).json(errors)
     }
@@ -44,7 +48,7 @@ const createGame = async (req, res) => {
         const game = await Game.create({
             name, 
             gameImage: `https://bonniezu.ru/static/${req.file.filename}`,
-            types 
+            types
         });
 
         res.status(201).json({game})

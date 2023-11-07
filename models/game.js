@@ -13,12 +13,7 @@ const gameSchema = mongoose.Schema({
 
     types: {
         type: Map,
-        default: {
-            'steam': 2000,
-            'epic': 1500,
-            'xbox': 4000,
-            'ps': 4500
-        }
+        required: true
     }
 });
 
