@@ -35,7 +35,7 @@ const createGame = async (req, res) => {
     }
 
     if(!req.body.types) {
-        errors.name = {message: 'Укажите опцию'}
+        errors.name = {message: 'Пожалуйста, укажите опции'}
     }
 
     if (Object.keys(errors).length > 0) {
@@ -44,6 +44,8 @@ const createGame = async (req, res) => {
 
     try {
         const { name, types } = req.body;
+
+        console.log(name, types)
 
         const game = await Game.create({
             name, 
