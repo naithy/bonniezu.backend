@@ -22,6 +22,7 @@ app.use('/api/spotify', require('./routes/spotify'));
 app.use('/api/discord', require('./routes/discord'));
 app.use('/api/customers', require('./routes/customers'))
 app.use('/api/chatgpt', require('./routes/chatgpt'));
+app.use('/api/brawl', require('./routes/brawl'));
 
 const server = http.createServer(app);
 
