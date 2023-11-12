@@ -48,7 +48,7 @@ const createGame = async (req, res) => {
         if (description) {
             const game = await Game.create({
                 name, 
-                description,
+                description: JSON.parse(description),
                 gameImage: `https://bonniezu.ru/static/${req.file.filename}`,
                 types: JSON.parse(types)
             });
