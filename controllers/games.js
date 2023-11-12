@@ -30,20 +30,29 @@ const createGame = async (req, res) => {
         errors.name = {message: "Пожалуйста, укажите название"}
     }
 
-    // if(!req.file) {
-    //     errors.gameImage = {message: "Пожалуйста, добавьте фото игры"}
-    // }
+    if(!req.file) {
+        errors.gameImage = {message: "Пожалуйста, добавьте фото игры"}
+    }
 
     if(!req.body.types) {
         errors.name = {message: 'Пожалуйста, укажите опции'}
     }
-
+    
     if (Object.keys(errors).length > 0) {
         return res.status(400).json(errors)
     }
 
     try {
-        const { name, types } = req.body;
+        const { name, types, description } = req.body;
+
+        if (description) {
+            const game = await Game.create({
+                name, 
+                description,
+                gameImage: `https://bonniezu.ru/static/${req.file.filename}`,
+                types: JSON.parse(types)
+            });
+        }
 
         const game = await Game.create({
             name, 

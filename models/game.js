@@ -14,6 +14,11 @@ const gameSchema = mongoose.Schema({
     types: {
         type: Map,
         required: true
+    },
+    
+    description: {
+        type: Map,
+        required: false
     }
 });
 
