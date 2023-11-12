@@ -30,9 +30,9 @@ const createGame = async (req, res) => {
         errors.name = {message: "Пожалуйста, укажите название"}
     }
 
-    if(!req.file) {
-        errors.gameImage = {message: "Пожалуйста, добавьте фото игры"}
-    }
+    // if(!req.file) {
+    //     errors.gameImage = {message: "Пожалуйста, добавьте фото игры"}
+    // }
 
     if(!req.body.types) {
         errors.name = {message: 'Пожалуйста, укажите опции'}
