@@ -1,9 +1,9 @@
 const express = require('express');
-const { getBrawl } = require('../controllers/brawl');
+const { getXbox } = require('../controllers/xbox');
 
 const router = express.Router();
 
-router.get('/', getBrawl);
+router.get('/', getXbox);
 
 
 module.exports = router;
