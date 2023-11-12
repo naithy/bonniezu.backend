@@ -29,7 +29,7 @@ const getInvoiceLink = async (req, res) => {
         
         const invoiceLink = await bot.createInvoiceLink(
             title, 
-            description='Discord', 
+            description='...', 
             payload=data,
             provider_token=PROVIDER_TOKEN, 
             currency='RUB', 
@@ -38,11 +38,7 @@ const getInvoiceLink = async (req, res) => {
                     label: title,
                     amount: +price * 100
                 }
-            ],
-            {
-                photo_url: photoUrl,
-            }
-            )
+            ],)
         res.status(201).json(invoiceLink)
     } catch (error) {
         res.status(500).json({
