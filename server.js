@@ -23,6 +23,7 @@ app.use('/api/discord', require('./routes/discord'));
 app.use('/api/customers', require('./routes/customers'))
 app.use('/api/chatgpt', require('./routes/chatgpt'));
 app.use('/api/brawl', require('./routes/brawl'));
+app.use('/api/xbox', require('./routes/xbox'));
 
 const server = http.createServer(app);
 
