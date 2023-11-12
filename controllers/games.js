@@ -56,6 +56,7 @@ const createGame = async (req, res) => {
         res.status(500).json({
             message: "Не удалось создать game"
         });
+        console.log(error)
     }
 };
 
