@@ -52,13 +52,14 @@ const createGame = async (req, res) => {
                 gameImage: `https://bonniezu.ru/static/${req.file.filename}`,
                 types: JSON.parse(types)
             });
+        } else {
+            const game = await Game.create({
+                name, 
+                gameImage: `https://bonniezu.ru/static/${req.file.filename}`,
+                types: JSON.parse(types)
+            });
         }
 
-        const game = await Game.create({
-            name, 
-            gameImage: `https://bonniezu.ru/static/${req.file.filename}`,
-            types: JSON.parse(types)
-        });
 
         res.status(201).json({game})
     } catch(error) {
