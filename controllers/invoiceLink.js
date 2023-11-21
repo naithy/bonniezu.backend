@@ -75,7 +75,7 @@ bot.on("successful_payment", async (msg) => {
 
 bot.on("message", async (msg) => {
     const text = msg.text
-    bot.sendMessage(msg,chat,id, 'Переходи в интернет магазин по кнопке ниже!')
+    bot.sendMessage(msg.chat.id, 'Переходи в интернет магазин по кнопке ниже!')
 
     if(text === '/start') {
         await bot.sendMessage(msg.chat.id, 'Переходи в магазин по кнопке ниже!', {
