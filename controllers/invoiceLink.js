@@ -80,7 +80,9 @@ bot.on("message", async (msg) => {
     if(text === '/start') {
         await bot.sendMessage(msg.chat.id, 'Переходи в магазин по кнопке ниже!', {
             reply_markup: {
-                inline_keyboard: [{text: 'Магазин', web_app: {url: 'https://comfy-blini-ab6f36.netlify.app/'}}]
+                inline_keyboard: [
+                    [{text: 'Магазин', web_app: {url: 'https://comfy-blini-ab6f36.netlify.app/'}}]
+                ]
             }
         })
     }
