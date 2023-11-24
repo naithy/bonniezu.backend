@@ -19,6 +19,8 @@ const getInvoiceLink = async (req, res) => {
     try {
         let { amount, desc } = req.body;
 
+        desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+
         const payment = customId({ amount, desc })
 
         const data = [amount, payment, SHOP, CURRENCY, desc, SECRET]
