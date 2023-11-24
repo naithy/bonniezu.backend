@@ -25,7 +25,7 @@ const getInvoiceLink = async (req, res) => {
         const sign = crypto.createHash('md5').update(data.join('|')).digest('hex')
 
 
-        const invoiceLink = `https://payok.io/pay?amount=${amount}&${payment}=10000&shop=${SHOP}&desc=${desc}&currency=${CURRENCY}&sign=${sign}&lang=RU`
+        const invoiceLink = `https://payok.io/pay?amount=${amount}&payment=${payment}&shop=${SHOP}&desc=${desc}&currency=${CURRENCY}&sign=${sign}&lang=RU`
 
         res.status(201).json(invoiceLink)
     } catch (error) {
