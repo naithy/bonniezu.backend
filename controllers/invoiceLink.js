@@ -17,13 +17,14 @@ const CURRENCY = 'RUB'
 const getInvoiceLink = async (req, res) => {
 
     try {
-        const { amount, desc } = req.body;
+        let { amount, desc } = req.body;
 
         const payment = customId({ amount, desc })
 
         const data = [amount, payment, SHOP, CURRENCY, desc, SECRET]
         const sign = crypto.createHash('md5').update(data.join('|')).digest('hex')
 
+        desc = desc.replace(/ /g, '%20')
 
         const invoiceLink = `https://payok.io/pay?amount=${amount}&payment=${payment}&shop=${SHOP}&desc=${desc}&currency=${CURRENCY}&sign=${sign}&lang=RU`
 
