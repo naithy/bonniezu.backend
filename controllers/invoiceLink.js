@@ -1,14 +1,37 @@
 const TelegramBot = require('node-telegram-bot-api');
 const Customer = require('../models/customer');
 const crypto = require('crypto');
+const customId = require('custom-id')
+
 
 const TOKEN = process.env.TOKEN;
 const PROVIDER_TOKEN = process.env.PROVIDER_TOKEN;
 
 const bot = new TelegramBot(TOKEN, {polling: true});
 
+const SHOP = 9306;
+const SECRET = process.env.SECRET;
+const CURRENCY = 'RUB'
+
 
 const getInvoiceLink = async (req, res) => {
+
+    try {
+        const { amount, desc } = req.body;
+
+        const payment = customId({ amount, desc })
+
+        const data = [amount, payment, SHOP, CURRENCY, desc, SECRET]
+        const sign = crypto.createHash('md5').update(data.join('|')).digest('hex')
+
+
+        const invoiceLink = `https://payok.io/pay?amount=${amount}&${payment}=10000&shop=${SHOP}&desc=${desc}&currency=${CURRENCY}&sign=${sign}&lang=RU`
+
+        res.status(201).json(invoiceLink)
+    } catch (error) {
+        res.status(500)
+    }
+
 
     // const errors = {};
 
@@ -50,27 +73,27 @@ const getInvoiceLink = async (req, res) => {
 
 
 
-bot.on("pre_checkout_query", (msg) => { bot.answerPreCheckoutQuery(msg.id, true); });
+// bot.on("pre_checkout_query", (msg) => { bot.answerPreCheckoutQuery(msg.id, true); });
 
-bot.on("successful_payment", async (msg) => { 
-    const { id, first_name, last_name, username } = msg.chat;
-    const { total_amount, invoice_payload } = msg.successful_payment;
-    try {
-        await Customer.create({
-            first_name,
-            last_name,
-            username,
-            user_id: id,
-            total_amount: total_amount / 100,
-            payload: invoice_payload
-        })
-    } catch(error) {
-        console.log(error)
-    }
+// bot.on("successful_payment", async (msg) => { 
+//     const { id, first_name, last_name, username } = msg.chat;
+//     const { total_amount, invoice_payload } = msg.successful_payment;
+//     try {
+//         await Customer.create({
+//             first_name,
+//             last_name,
+//             username,
+//             user_id: id,
+//             total_amount: total_amount / 100,
+//             payload: invoice_payload
+//         })
+//     } catch(error) {
+//         console.log(error)
+//     }
 
 
-    bot.sendMessage(msg.chat.id, 'Товар был куплен, ожидайте связи с продавцом')
-}); 
+//     bot.sendMessage(msg.chat.id, 'Товар был куплен, ожидайте связи с продавцом')
+// }); 
 
 
 bot.on("message", async (msg) => {
