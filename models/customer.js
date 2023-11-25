@@ -2,23 +2,13 @@ const mongoose = require('mongoose');
 
 const customerSchema = mongoose.Schema({
 
-    first_name: {
+    payment_id: {
         type: String,
         required: true
     },
 
-    last_name: {
-        type: String,
-        required: false
-    },
-
-    username: {
-        type: String,
-        required: true
-    },
-
-    user_id: {
-        type: String,
+    custom: {
+        type: Array,
         required: true
     },
 

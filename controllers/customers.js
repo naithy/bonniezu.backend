@@ -1,4 +1,45 @@
 const Customer = require('../models/customer');
+const crypto = import('crypto')
+
+const SECRET = process.env.SECRET
+
+
+const createCustomer = async (req, res) => {
+    try {
+        const { 
+            payment_id, 
+            shop, 
+            amount, 
+            profit, 
+            desc, 
+            currency, 
+            currency_amount, 
+            sign, 
+            email, 
+            date, 
+            method, 
+            custom, 
+            underpayment 
+        } = req.body
+
+        const data = [SECRET, desc, currency, shop, payment_id, amount]
+
+        const sign2 = crypto.createHash('md5').update(data.join('|')).digest('hex')
+
+        if (sign2 === sign) {
+            await Customer.create({
+                payment_id,
+                custom,
+                total_amount: amount,
+                payload: desc,
+            })
+        }
+
+    } catch (error) {
+
+    }
+}
+
 
 const getCustomers = async (req, res) => {
     try {
@@ -27,6 +68,7 @@ const deleteCustomer = async (req, res) => {
 }
 
 module.exports = {
+    createCustomer,
     getCustomers,
     deleteCustomer
 }
