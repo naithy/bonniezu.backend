@@ -9,7 +9,7 @@ const PROVIDER_TOKEN = process.env.PROVIDER_TOKEN;
 
 const bot = new TelegramBot(TOKEN, {polling: true});
 
-const SHOP = 9306;
+const SHOP = 9340;
 const SECRET = process.env.SECRET;
 const CURRENCY = 'RUB'
 
