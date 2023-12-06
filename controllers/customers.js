@@ -21,10 +21,7 @@ const createCustomer = async (req, res) => {
             custom, 
             underpayment 
         } = req.body
-        console.log('Сработало', sign)
-        console.log(SECRET)
         const data = [SECRET, desc, currency, shop, payment_id, amount]
-        console.log(data)
         const sign2 = await crypto.createHash('md5').update(data.join('|')).digest('hex')
         
         console.log('work', sign2)
