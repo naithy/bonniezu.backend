@@ -5,42 +5,44 @@ const SECRET = process.env.SECRET
 
 
 const createCustomer = async (req, res) => {
-    console.log('work')
-    // try {
-    //     const { 
-    //         payment_id, 
-    //         shop, 
-    //         amount, 
-    //         profit, 
-    //         desc, 
-    //         currency, 
-    //         currency_amount, 
-    //         sign, 
-    //         email, 
-    //         date, 
-    //         method, 
-    //         custom, 
-    //         underpayment 
-    //     } = req.body
-    //     console.log('Сработало', sign)
-    //     const data = [SECRET, desc, currency, shop, payment_id, amount]
+    try {
+        const { 
+            payment_id, 
+            shop, 
+            amount, 
+            profit, 
+            desc, 
+            currency, 
+            currency_amount, 
+            sign, 
+            email, 
+            date, 
+            method, 
+            custom, 
+            underpayment 
+        } = req.body
+        console.log('Сработало', sign)
+        const data = [SECRET, desc, currency, shop, payment_id, amount]
 
-    //     const sign2 = crypto.createHash('md5').update(data.join('|')).digest('hex')
+        const sign2 = crypto.createHash('md5').update(data.join('|')).digest('hex')
         
-    //     console.log('work', sign2)
+        console.log('work', sign2)
 
-    //     if (sign2 === sign) {
-    //         await Customer.create({
-    //             payment_id,
-    //             custom,
-    //             total_amount: amount,
-    //             payload: desc,
-    //         })
-    //     }
+        if (sign2 === sign) {
+            await Customer.create({
+                payment_id,
+                custom,
+                total_amount: amount,
+                payload: desc,
+            })
 
-    // } catch (error) {
+            res.status(200)
+        }
 
-    // }
+
+    } catch (error) {
+
+    }
 }
 
 
