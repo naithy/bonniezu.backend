@@ -1,5 +1,5 @@
 const Customer = require('../models/customer');
-const crypto = import('crypto')
+const crypto = require('crypto')
 
 const SECRET = process.env.SECRET
 
