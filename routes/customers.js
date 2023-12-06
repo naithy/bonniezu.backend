@@ -12,7 +12,7 @@ const upload = multer({ storage });
 
 
 router.get('/', getCustomers);
-router.post('/', createCustomer)
+router.post('/', upload.single(), createCustomer)
 router.delete('/:id', upload.single(), deleteCustomer)
 
 
