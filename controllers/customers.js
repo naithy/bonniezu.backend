@@ -34,7 +34,7 @@ const createCustomer = async (req, res) => {
 
         if (sign2 === sign) {
             console.log('200')
-            res.status(200)
+            res.status(200).json('ok')
             await Customer.create({
                 payment_id,
                 custom,
