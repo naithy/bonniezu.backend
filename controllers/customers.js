@@ -29,6 +29,9 @@ const createCustomer = async (req, res) => {
         const sign2 = crypto.createHash('md5').update(data.join('|')).digest('hex')
         console.log(sign2)
 
+        console.log(sign2 === sign)
+        console.log(sign2 == sign)
+
         if (sign2 === sign) {
 
             await Customer.create({
