@@ -17,7 +17,7 @@ const CURRENCY = 'RUB'
 const getInvoiceLink = async (req, res) => {
 
     try {
-        let { amount, desc, custom } = req.body;
+        let { amount, desc, user_name, user_id } = req.body;
 
         desc = desc.charAt(0).toUpperCase() + desc.slice(1);
 
@@ -28,7 +28,7 @@ const getInvoiceLink = async (req, res) => {
 
         desc = desc.replace(/ /g, '%20')
 
-        const invoiceLink = `https://payok.io/pay?amount=${amount}&payment=${payment}&shop=${SHOP}&desc=${desc}&currency=${CURRENCY}&sign=${sign}&lang=RU&customparam=${custom}`
+        const invoiceLink = `https://payok.io/pay?amount=${amount}&payment=${payment}&shop=${SHOP}&desc=${desc}&currency=${CURRENCY}&sign=${sign}&lang=RU&username=${user_name}&userid=${user_id}`
 
         res.status(201).json(invoiceLink)
     } catch (error) {
