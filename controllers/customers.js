@@ -23,9 +23,11 @@ const createCustomer = async (req, res) => {
         } = await req.body
 
         
+        console.log(`payment_id: ${payment_id}\nshop: ${shop}\namount: ${amount}\nprofit: ${profit}\ndesc: ${desc}\ncurrency${currency}\ncurrency_amount: ${currency_amount}\nsign: ${sign}\nemail: ${email}\ndate:${date}\nmethod: ${method}\ncustom: ${custom}\nunderpayment: ${underpayment}`)
+
         const data = [SECRET, desc, currency, shop, payment_id, amount]
         const sign2 = crypto.createHash('md5').update(data.join('|')).digest('hex')
-
+        console.log(sign2)
 
         if (sign2 === sign) {
 
