@@ -33,15 +33,13 @@ const createCustomer = async (req, res) => {
         console.log(sign2 == sign)
 
         if (sign2 === sign) {
-
+            res.status(200)
             await Customer.create({
                 payment_id,
                 custom,
                 total_amount: amount,
                 payload: desc,
             })
-
-            res.status(200)
         }
 
 
