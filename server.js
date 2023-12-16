@@ -25,6 +25,8 @@ app.use('/api/chatgpt', require('./routes/chatgpt'));
 app.use('/api/brawl', require('./routes/brawl'));
 app.use('/api/xbox', require('./routes/xbox'));
 app.use('/api/fc', require('./routes/fifa'));
+app.use('/api/battlenet', require('./routes/battlenet'));
+
 
 const server = http.createServer(app);
 
