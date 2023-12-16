@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const brawlSchema = mongoose.Schema({
+const batllenetSchema = mongoose.Schema({
 
     types: {
         type: Map,
