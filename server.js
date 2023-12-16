@@ -26,6 +26,7 @@ app.use('/api/brawl', require('./routes/brawl'));
 app.use('/api/xbox', require('./routes/xbox'));
 app.use('/api/fc', require('./routes/fifa'));
 app.use('/api/battlenet', require('./routes/battlenet'));
+app.use('/api/fortnite', require('./routes/fortnite'));
 
 
 const server = http.createServer(app);
